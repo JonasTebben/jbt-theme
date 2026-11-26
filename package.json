@@ -1,0 +1,36 @@
+{
+  "name": "jbt-theme",
+  "version": "1.0.0",
+  "description": "JBT Theme – a theme for Slidecko and Slidev by Jonas Tebben",
+  "author": "Jonas Tebben",
+  "license": "Apache-2.0",
+  "type": "module",
+  "keywords": [
+    "slidev-theme",
+    "slidev"
+  ],
+  "engines": {
+    "slidev": ">=52.0.0"
+  },
+  "scripts": {
+    "dev": "slidev demo.md --open",
+    "demo-build": "slidev build demo.md",
+    "export": "slidev export demo.md",
+    "check": "node scripts/check.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JonasTebben/jbt-theme.git"
+  },
+  "files": [
+    "layouts",
+    "styles",
+    "jbt.theme.json",
+    "LICENSE",
+    "NOTICE",
+    "README.md"
+  ],
+  "devDependencies": {
+    "@slidev/cli": "52.20.1"
+  }
+}

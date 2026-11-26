@@ -1,0 +1,151 @@
+/* JBT Theme – Jonas Tebben, Apache-2.0 */
+
+.slidev-layout {
+  --jbt-deep: #006b96;
+  --jbt-sky: #00b6ff;
+  --jbt-mist: #e1f7ff;
+  --jbt-inset: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+  --jbt-glow: 2px 2px rgba(0, 0, 0, 0.2);
+  /* faceted stage background and title band, pure CSS (no image files) */
+  --jbt-stage: linear-gradient(118deg, transparent 58%, rgb(255 255 255 / .07) 58% 71%, transparent 71%),
+    linear-gradient(62deg, rgb(0 0 0 / .07) 22%, transparent 22% 48%, rgb(255 255 255 / .05) 48% 60%, transparent 60%),
+    linear-gradient(200deg, rgb(255 255 255 / .06) 18%, transparent 18%),
+    radial-gradient(60% 45% at 100% 20%, #84b5dc, transparent),
+    radial-gradient(40% 35% at 100% 100%, #a3a19f, transparent),
+    linear-gradient(155deg, #00aeef, #2b93cb 28%, #42789c 52%, #45505a 74%, #6c6a68);
+  --jbt-band: linear-gradient(100deg, transparent 30%, rgb(255 255 255 / .06) 30% 46%, transparent 46%),
+    linear-gradient(90deg, #4d7898, #5f90b4 22%, #557286 45%, #55595d 68%, #8f8d8b);
+
+  --slidev-code-padding: 8px;
+  --slidev-code-font-family: 'JetBrains Mono';
+  --slidev-code-font-size: clamp(0.6rem, 0.55vh, 0.8rem);
+  --slidev-code-line-height: clamp(0.8rem, 0.6vh, 1rem);
+  --slidev-inline-code-font-size: 0.925rem;
+
+  font-size: 0.95rem;
+  font-variant-ligatures: none;
+  overflow: hidden;
+
+  > * { max-width: 100%; }
+
+  h1 {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 600;
+    margin: 0 0 1.5rem -0.05em;
+    overflow-wrap: break-word;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+  }
+  h1 + p { margin-bottom: 1rem; }
+
+  h2 {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  :is(p, ul, table) + h2 { margin-top: 2.5rem; }
+
+  h3 { font-size: 1.5rem; line-height: 2rem; }
+  h4 { font-size: 1.25rem; line-height: 1.75rem; }
+  h5 { font-size: 1rem; line-height: 1.5rem; }
+  h6 {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    padding-top: 0.25rem;
+    margin-left: -0.05em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  h6:not(.opacity-100) { opacity: 0.4; }
+
+  ul { list-style: disc; }
+  ul ul { list-style: circle; margin-top: 0.5rem; }
+  ul ul ul { list-style: square; }
+  li { margin-block: 0.375rem; }
+
+  /* tables: deep-blue header, no borders, every second row lightly striped */
+  table { border-collapse: collapse; }
+  tr { border: 0; }
+  th { font-weight: 600; color: #fff; background: var(--jbt-deep); border: 0; }
+  td { color: #181818; background: #fff; border: 0; } /* light cells keep dark text in dark mode too */
+  tr:nth-child(even) td { background: #f0f0f0; }
+
+  a { color: var(--jbt-deep); }
+  a:hover { color: var(--jbt-sky); }
+}
+
+/* stage layouts: full-bleed background, white frame, centred headline */
+.slidev-layout:is(.cover, .quiz, .intro) {
+  display: grid;
+  height: 100%;
+  border: 4px solid #fff;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff; /* body text on the dark stage, in light and dark mode */
+
+  :is(h1, h2) { text-align: center; letter-spacing: 0.025em; text-shadow: var(--jbt-glow); }
+  h1 { font-size: 3.75rem; line-height: 5rem; color: #fff; }
+  h2 { color: var(--jbt-mist); }
+  a { color: #fff; text-decoration: underline; }
+}
+.slidev-layout:is(.cover, .quiz) { background-image: linear-gradient(#0004, #0007), var(--jbt-stage); }
+.slidev-layout.intro { background-image: var(--jbt-stage); }
+/* inline code keeps Slidev's code box (light or dark), so it keeps the box's text colour; also on Slidev's black end slide (the quiz box has its own) */
+.slidev-layout:is(.cover, .intro, .end) :not(pre) > code { color: var(--slidev-code-foreground); }
+/* deep blue links vanish on dark backgrounds: sky blue in dark mode and on the black end slide (the stage keeps white links) */
+:where(html.dark) .slidev-layout a, .slidev-layout.end a { color: var(--jbt-sky); }
+
+.slidev-layout.quiz {
+  background-blend-mode: lighten;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.4);
+
+  h1 { font-size: 2.25rem; line-height: 2.5rem; }
+
+  /* the answer box */
+  > div > div {
+    margin-top: 1rem;
+    padding: 1rem 2rem;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+    code { background-color: #00b6ff66; font-weight: 600; }
+    ul { list-style: none; }
+    li { background-color: color-mix(in srgb, var(--jbt-deep) 65%, var(--jbt-sky) 5%); border-radius: 0.375rem; padding: 0.5rem; }
+  }
+}
+
+/* page layouts: title on the band */
+.slidev-layout:is(.default, .hands-on) {
+  background-image: var(--jbt-band);
+  background-size: 100% 85px;
+  background-repeat: no-repeat;
+
+  h1 { color: #fff; }
+}
+.slidev-layout.hands-on h1 { text-transform: uppercase; }
+.slidev-layout.hands-on h1::before { content: '💻'; color: var(--jbt-mist); margin-right: 0.3em; }
+
+.slidev-layout:is(.fact, .statement, .quote) { display: grid; height: 100%; }
+.slidev-layout:is(.fact, .statement) { text-align: center; }
+.slidev-layout.fact h1 { font-size: 6rem; line-height: 1; font-weight: 700; }
+.slidev-layout.fact h1 + p { font-size: 1.5rem; line-height: 2rem; font-weight: 700; }
+.slidev-layout.statement h1 { font-size: 3.75rem; line-height: 1; font-weight: 700; }
+.slidev-layout.quote h1 + p { margin-top: 0.5rem; }
+.slidev-layout.section h1 { font-size: 3.75rem; line-height: 5rem; font-weight: 500; }
+
+/* code */
+.slidev-code { max-height: 70vh; overflow-y: auto; box-shadow: var(--jbt-inset); }
+.shiki-light { background: #f8f8f8 !important; }
+.shiki-dark { background: #1b1b1b !important; }
+li > code, li p code { font-size: var(--slidev-inline-code-font-size); }
+li > code, li p code, blockquote { box-shadow: var(--jbt-inset); }
+blockquote p code { box-shadow: none; }
+
+/* the presenter button is not used in class */
+[title='Presenter Mode'], [title='Presenter Mode'] + button { display: none; }

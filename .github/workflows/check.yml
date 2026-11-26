@@ -1,0 +1,25 @@
+name: Check
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Theme file, version and README agree
+        run: node scripts/check.mjs
+      - name: Demo builds with Slidev
+        run: |
+          npm ci --no-audit --no-fund
+          npm run demo-build
